@@ -1,5 +1,5 @@
 /*!
- * FilePondPluginMediaPreview 1.0.1
+ * FilePondPluginMediaPreview 1.0.9
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit undefined for details.
  */
@@ -326,11 +326,11 @@ const plugin = (fpAPI) => {
         ({ root, props }) => {
           const { id } = props;
           const item = query('GET_ITEM', id);
-
           // don't do anything while not an video or audio file or hidden
           if (
+            !item ||
             (!isPreviewableVideo(item.file) &&
-              !isPreviewablePdf(item.file) &&
+              !isPreviewableAudio(item.file) &&
               !isPreviewableAudio(item.file)) ||
             root.rect.element.hidden
           )
@@ -359,4 +359,4 @@ if (isBrowser) {
   );
 }
 
-export default plugin;
+export { plugin as default };

@@ -54,19 +54,12 @@ const plugin = (fpAPI) => {
         ({ root, props }) => {
           const { id } = props;
           const item = query("GET_ITEM", id);
-
-          // don't do anything while not an video or audio file or hidden
-          if (
-            (!isPreviewableVideo(item.file) &&
-              !isPreviewablePdf(item.file) &&
-              !isPreviewableAudio(item.file)) ||
-            root.rect.element.hidden
-          )
-            return;
-        }
-      )
-    );
-  });
+                // don't do anything while not an video or audio file or hidden
+                if (!item || (!isPreviewableVideo(item.file) && !isPreviewableAudio(item.file))  &&
+                    !isPreviewableAudio(item.file) || root.rect.element.hidden) return;
+            })
+        );
+    });
 
   // expose plugin
   return {
